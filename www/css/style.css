@@ -1,0 +1,137 @@
+/**/
+
+@font-face{
+  font-family: "jamesalmacen";
+  src: url("../fonts/JamesAlmacen.ttf") format("truetype");
+}
+
+.container{
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.contgrad{
+  background: linear-gradient(to right, #de6262, #ffb88c);
+}
+
+.contgray{
+  background-color: whitesmoke;
+  margin-top: 12vh;
+}
+
+.botaolink{
+  background-color: #ff825c;
+  color: white;
+  border-radius: 50px;
+  font-family: verdana;
+}
+
+.rTitulo{
+  color: white;
+  text-align: center;
+  padding: 10px 0 10px 0;
+}
+
+h1{
+  font-size: 40px;
+  font-family: jamesalmacen;
+}
+
+h2{
+  font-size: 35px;
+  font-family: jamesalmacen;
+}
+
+.rSubtitulo{
+  color: white;
+  text-align: center;
+  padding: 10px 0 10px 0;
+}
+
+.subtitulo{
+  font-size: 20px;
+  font-family: verdana;
+  color: white;
+}
+
+#btnEntradaInicial{
+  margin-top: 60vh;
+}
+
+.glyphicon{
+  color: white;
+  width: 100%;
+}
+
+.linha{
+  padding: 15px 0 15px 0;
+}
+
+.minitexto{
+  text-align: center;
+  color: white;
+}
+
+.imgsaida{
+  width: 100%;
+}
+
+.navbar-fixed-top{
+  background: linear-gradient(to right, #ff606d, #ffc271);
+  height: 12vh;
+}
+
+
+.lblmenu{
+  text-align: center;
+  color: white;
+}
+
+.colmenu{
+  text-align: center;
+}
+
+.imgmenu{
+  width: 25vw;
+}
+
+.inplogin{
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
+  width: 90vw;
+}
+
+.rlogin{
+  text-align: center;
+}
+
+.local{
+  color: #ff825c;
+}
+
+.btnMenu{
+  height: 7vh;
+}
+
+.navbar-header{
+  width: 10vw;
+}
+
+.input-group{
+  margin-top: 2vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navbar-brand{
+  margin: auto;
+  z-index: 1;
+}
+
+.nav>li>img{
+  margin-top: 1vh;
+  margin-left: 65vw;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+  <script src="components/jquery-3.3.1.min.js"></script>
+  <script src="components/bootstrap.min.js"></script>
+  <script src="components/acao.js"></script>
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+  <nav class="navbar navbar-fixed-top">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li>
+            <a class="navbar-brand" href="menu.html">
+              <img class="btnMenu" src="img/seta.png" alt="">
+            </a>
+          </li>
+        </ul>
+      </div>
+  </nav>
+
+  <div class="container contgray">
+
+    <div class="row linha">
+      <div class="col-xs-9">
+        <p><strong>Endereço</strong></p>
+      </div>
+      <div class="col-xs-3">
+        <p>Km</p>
+      </div>
+    </div>
+
+    <div class="row linha">
+      <div class="col-xs-12">
+        <p>Cliente:</p>
+      </div>
+    </div>
+
+    <div class="row linha">
+      <div class="col-xs-6">
+        <p>Valor:</p>
+      </div>
+    </div>
+
+    <div class="row linha local">
+      <div class="col-xs-2">
+        <img src="img/mapmarker.png" alt="" style="width: 100%">
+      </div>
+      <div class="col-xs-10">
+        <p>Cidade, estado</p>
+      </div>
+    </div>
+
+    <div class="row linha">
+      <div class="col-xs-6">
+        <button class="btn btn-block botaolink" id="btnRota">Definir Rota</button>
+      </div>
+    </div>
+
+    <div class="row linha" style="background-color: gray; min-height: 50vh">
+      <div class="col-xs-12">
+        <div id="mapa">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row linha">
+      
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+  <script src="components/jquery-3.3.1.min.js"></script>
+  <script src="components/bootstrap.min.js"></script>
+  <script src="components/acao.js"></script>
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    <div class="container contgrad">
+
+      <div class="row linha rTitulo">
+        <div class="col-xs-12">
+          <h2>Tati & Isaque</h2>
+        </div>
+      </div>
+
+      <div class="row linha">
+        <div class="col-xs-6 colmenu">
+          <a href="estoque.html">
+            <img src="img/cadeira.png" alt="" class="imgmenu"><br>
+            <label class="lblmenu" for="">Estoque</label>
+          </a>
+        </div>
+        <div class="col-xs-6 colmenu">
+          <a href="pedido.html">
+            <img src="img/calendario.png" alt="" class="imgmenu"><br>
+            <label class="lblmenu" for="">Entregas agendadas</label>
+          </a>
+        </div>
+      </div>
+
+      <div class="row linha">
+        <div class="col-xs-6 colmenu">
+          <a href="entregaseRetiradas.html">
+            <img src="img/caminhao.png" alt="" class="imgmenu"><br>
+            <label class="lblmenu" for="">Entregas e retiradas</label>
+          </a>
+        </div>
+        <div class="col-xs-6 colmenu">
+          <a href="pagamentosPendentes.html">
+            <img src="img/moeda.png" alt="" class="imgmenu"><br>
+            <label class="lblmenu" for="">Pagamentos pendentes</label>
+          </a>
+        </div>
+      </div>
+
+      <div class="row linha">
+        <div class="col-xs-6 colmenu">
+          <a href="cliente.html">
+            <img src="img/pessoa.png" alt="" class="imgmenu"><br>
+            <label class="lblmenu" for="">Clientes</label>
+          </a>
+        </div>
+        <div class="col-xs-6 colmenu">
+          <a data-toggle="modal" data-target="#modalSair">
+            <img src="img/x.png" alt="" class="imgmenu"><br>
+            <label class="lblmenu" for="">Sair</label>
+          </a>
+        </div>
+      </div>
+
+      <div id="modalSair" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Saída</h3>
+          </div>
+          <div class="modal-body">
+            
+            <div class="row linha">
+              <div class="col-xs-12">
+                <p>Tem certeza de que deseja sair?</p>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" onclick="$(location).attr('href', 'login.html');">Sim</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    </div>
+</body>
+</html>
