@@ -7,3 +7,4 @@ $(document).on("click", "#btnEntradaInicial", function(){
 $(document).on("click", "#btnEntradaLogin", function(){
   $(location).attr("href", "menu.html");
 });
+

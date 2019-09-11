@@ -41,7 +41,91 @@
 
   <div class="container contgray">
 
+    <div class="row linha itemProd" data-toggle="modal" data-target="#modalCliente">
+      <div class="col-xs-12">
+        <label for="">Nome:</label><br>
+        <label for="">Telefone:</label><br>
+        <label for="">Endereço:</label><br>
+      </div>
+    </div>
 
+    <!-- Modal de consultar cliente quantidade -->
+    <div id="modalCliente" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Cliente:</h3>
+          </div>
+          <div class="modal-body">
+            
+            <div class="row linha">
+              <div class="col-xs-12">
+                <label for="">Nome:</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+
+            <div class="row linha">
+              <div class="col-xs-12">
+                <label for="">Telefone:</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+
+            <div class="row linha">
+              <div class="col-xs-12">
+                <label for="">Endereço:</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDeletarCliente">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Modal de deletar cliente -->
+    <div id="modalDeletarCliente" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Deseja mesmo remover o cliente?</h3>
+          </div>
+          <div class="modal-body">
+            
+            <div class="row linha">
+              <div class="col-xs-12">
+                <label for="">Informe o motivo:</label>
+                <textarea class="form-control" name="" id="" cols="" rows=""></textarea>
+              </div>
+            </div>
+            
+            <div class="row linha">
+              <div class="col-xs-12">
+                <label for="">Confirme a sua senha:</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+          </div>
+        </div>
+
+      </div>
+    </div>
 
   </div>
 </body>

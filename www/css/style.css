@@ -131,7 +131,38 @@ h2{
   z-index: 1;
 }
 
+a link{
+  text-decoration: none;
+}
+
+a hover{
+  text-decoration: none;
+}
+
+a click{
+  text-decoration: none;
+}
+
 .nav>li>img{
   margin-top: 1vh;
   margin-left: 65vw;
+}
+
+.itemProd{
+  background-color: gainsboro;
+  border-radius: 5px;
+  margin: 15px 0 15px 0;
+}
+
+.imgProd{
+  border-right: 2px black solid;
+}
+
+.modal-body{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+label>strong{
+  color: red;
 }
