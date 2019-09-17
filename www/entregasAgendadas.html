@@ -9,6 +9,7 @@
   <script src="components/jquery-3.3.1.min.js"></script>
   <script src="components/bootstrap.min.js"></script>
   <script src="components/acao.js"></script>
+  <script src="components/entrega.js"></script>
 
   <link rel="stylesheet" href="components/loader.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -41,13 +42,14 @@
 
   <div class="container contgray">
 
-    <a href="pedido.html"><div class="row linha itemProd">
+    <div class="row linha itemProd" name="regEntregaAgendada" value="" onclick="setPedidoAgendado(this.value)">
       <div class="col-xs-12">
         <label for="">Cliente:</label><br>
         <label for="">Endereço:</label><br>
+        <label for="">Data:</label><br>
         <label for="">Valor:</label><br>
       </div>
-    </div></a>
+    </div>
 
     <hr>
 

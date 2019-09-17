@@ -1,5 +1,11 @@
 // This is a JavaScript file
 
+$(document).on("click", "#linkMenu", function(){
+
+  $(location).attr("href", "menu.html");
+
+});
+/*
 $(document).on("click", "#btnCadProd", function(){
   var prop = document.getElementById('foto').files[0];
   var nome_imagem = prop.name;
@@ -51,7 +57,7 @@ function listarProduto(){
         }
     });
 }
-
+*/
 function habilita(){
   $("#nomeConsProd").prop("readonly", false);
   $("#descConsProd").prop("readonly", false);
