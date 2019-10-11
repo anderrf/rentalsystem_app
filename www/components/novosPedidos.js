@@ -1,21 +1,27 @@
 // This is a JavaScript file
 
+$(document).on("click", ".itemProd", function(){
+  $("#hPedido").val("Pedido");
+  var contPedido = "";
+  contPedido += "<div class='row linha'><div class='col-xs-12'><label for=''>Cliente:</label><input class='form-control' type='text' readonly></div></div><div class='row linha'><div class='col-xs-12'><label for=''>Endereço:</label><input class='form-control' type='text' readonly></div></div><div class='row linha'><div class='col-xs-12'><h4>Entrega:</h4><div class='row'><div class='col-xs-6'><label for=''>Data:</label><input class='form-control' type='date' readonly></div><div class='col-xs-6'><label for=''>Horário:</label><input class='form-control' type='time' readonly></div></div></div></div><div class='row linha'><div class='col-xs-12'><h4>Retirada:</h4><div class='row'><div class='col-xs-6'><label for=''>Data:</label><input class='form-control' type='date' readonly></div><div class='col-xs-6'><label for=''>Horário:</label><input class='form-control' type='time' readonly></div></div></div></div> <div class='row linha'><div class='col-xs-12'><label for=''>Valor:</label><input class='form-control' type='number' readonly ></div></div>";
+  $("#moInner").html(contPedido);
+  var optPedido = "";
+  optPedido += "<button type='button' class='btn btn-success' id='btnAceitarPedido'>Aceitar</button><button type='button' class='btn btn-danger' id='btnNegarPedido'>Negar</button>";
+  $("#moFooter").html(optPedido);
+});
+
 $(document).on("click", "#btnAceitarPedido", function(){
 
 });
 
 $(document).on("click", "#btnNegarPedido", function(){
-  $("#moInner").prop("hidden", true);
-  var negacao = "<div class='row linha'><div class='col-xs-12'><label>Acrescente o motivo da negação do pedido:</label></div></div> <div class='row linha'><div class='col-xs-12'><input type='radio' name='motivo' value='material'>Falta de material<br><input type='radio' name='motivo' value='horario'>Indisponibilidade de horário<br></div></div>";
-  $("#moBody").html(negacao);
-  $("#btnAceitarPedido").prop("hidden", true);
-  $("#btnNegarPedido").prop("hidden", true);
-  var confirmarNegar = "<button type='button' class='btn btn-danger' id='btnConfirmarNegar'><span class='glyphicon glyphicon-remove-circle'></span></button>";
-  $("#moFooter").html(confirmarNegar);
-});
-
-$("#modalNovoPedido").modal('hide', function(){
-  $(location).attr("href", "menu.html");
+  $("#hPedido").val("Deseja negar o pedido?");
+  var contNegar = "";
+  contNegar += "<div class='row linha'><div class='col-xs-12'><label>Informe o motivo:</label></div></div><div class='row linha'><div class='col-xs-12'><input type='radio' name='negacao' value='estoque'>Indisponibilidade de estoque</div></div><div class='row linha'><div class='col-xs-12'><input type='radio' name='negacao' value='tempo'>Indisponibilidade de tempo</div></div>";
+  $("#moInner").html(contNegar);
+  optNegar = "";
+  var optNegar = "<button type='button' class='btn btn-success' data-dismiss='modal'>Cancelar</button><button type='button' class='btn btn-danger' id='btnConfirmarNegar'>Negar</button>";
+  $("#moFooter").html(optNegar);
 });
 
 $(document).on("click", "#btnConfirmarNegar", function(){

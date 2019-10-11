@@ -55,7 +55,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h3 class="modal-title">Pedido</h3>
+            <h3 class="modal-title" id="hPedido">Pedido</h3>
           </div>
           <div class="modal-body" id="moBody">
             
@@ -76,13 +76,34 @@
             </div>
 
             <div class="row linha">
-              <div class="col-xs-6">
-                <label for="">Data:</label>
-                <input class="form-control" type="date" readonly>
+              <div class="col-xs-12">
+                <h4>Entrega:</h4>
+                <div class="row">
+                  <div class="col-xs-6">
+                    <label for="">Data:</label>
+                    <input class="form-control" type="date" readonly>
+                  </div>
+                  <div class="col-xs-6">
+                    <label for="">Horário:</label>
+                    <input class="form-control" type="time" readonly>
+                  </div>
+                </div>
               </div>
-              <div class="col-xs-6">
-                <label for="">Horário:</label>
-                <input class="form-control" type="time" readonly>
+            </div>
+
+            <div class="row linha">
+              <div class="col-xs-12">
+                <h4>Retirada:</h4>
+                <div class="row">
+                  <div class="col-xs-6">
+                    <label for="">Data:</label>
+                    <input class="form-control" type="date" readonly>
+                  </div>
+                  <div class="col-xs-6">
+                    <label for="">Horário:</label>
+                    <input class="form-control" type="time" readonly>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -97,8 +118,8 @@
 
           </div>
           <div class="modal-footer" id="moFooter">
-            <button type="button" class="btn btn-success" id="btnAceitarPedido"><span class="glyphicon glyphicon-ok"></span></button>
-            <button type="button" class="btn btn-danger" id="btnNegarPedido"><span class="glyphicon glyphicon-remove"></span></button>
+            <button type="button" class="btn btn-success" id="btnAceitarPedido">Aceitar</button>
+            <button type="button" class="btn btn-danger" id="btnNegarPedido">Negar</button>
           </div>
         </div>
 

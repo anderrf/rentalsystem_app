@@ -13,6 +13,7 @@
 
   <script>
     $(document).ready(function(){
+      listarProduto();
       desabilita();
     });
   </script>
@@ -33,10 +34,9 @@
             </a>
           </li>
           <li>
-            <img class="btnMenu" src="img/mais.png" alt="" data-toggle="modal" data-target="#modalCadProduto" style="z-index: 1">
+            <img class="btnMenu" src="img/mais.png" alt="" data-toggle="modal" data-target="#modalProduto" style="z-index: 1" id="addProduto">
           </li>
         </ul>
-          
       </div>
   </nav>
 
@@ -44,204 +44,102 @@
 
     <div id="telaProd">
 
-      <div class='row linha itemProd' data-toggle='modal' data-target='#modalConProduto' value='"+dados.codigo+"'>
-        <div class='col-xs-3'>
-          <img class='img-responsive' src='https://rentalsystempm.000webhostapp.com/"+dados.foto+"' alt='' style='max-width: 100%; text-align: center'>
-        </div>
-        <div class='col-xs-9'>
-          <div class='row'>
-            <div class='col-xs-6'>
-              <label for=''><strong>Nome:</strong></label>
-            </div>
-            <div class='col-xs-6'>
-              <label for=''><strong>Descrição:</strong></label>
-            </div>
-          </div>
-          <div class='row'>
-            <div class='col-xs-6'>
-              <label for=''><strong>Quantidade:</strong></label>
-            </div>
-            <div class='col-xs-6'>
-              <label for=''><strong>Valor:</strong></label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr>
+      
 
     </div>
 
     <!-- Modal de cadastro -->
-    <div id="modalCadProduto" class="modal fade" role="dialog">
+    <div id="modalProduto" class="modal fade" role="dialog">
       <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h3 class="modal-title">Cadastre o produto:</h3>
+            <h3 class="modal-title" id="hProduto"></h3>
           </div>
           <div class="modal-body">
+
+            <div id="moInner">
+
+            </div>
             
-            <div class="row linha">
-              <div class="col-xs-12">
-                <label for="">Nome:</label>
-                <input class="form-control" type="text" id="nomeCadProd">
-              </div>
-            </div>
-
-            <div class="row linha">
-              <div class="col-xs-12">
-                <label for="">Descrição:</label>
-                <input class="form-control" type="text"  id="descCadProd">
-              </div>
-            </div>
-
-            <div class="row linha">
-              <div class="col-xs-6">
-                <label for="">Quantidade:</label>
-                <input class="form-control" type="number"  id="quantCadProd">
-              </div>
-              <div class="col-xs-6">
-                <label for="">Valor (por unidade):</label>
-                <input class="form-control" type="number"  id="valorCadProd">
-              </div>
-            </div>
-
-            <div class="row linha">
-              <div class="col-xs-12">
-                <label for="">Foto:</label>
-                <input class="form-control" type="file" id="foto">
-              </div>
-            </div>
-
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success" id="btnCadProd">Cadastrar</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          <div class="modal-footer" id="moFooter">
           </div>
         </div>
 
       </div>
     </div>
-
-    <!-- Modal de consulta -->
-    <div id="modalConProduto" class="modal fade" role="dialog">
+<!--
+     Modal de consulta 
+    <div id="modalConProduto" class="modal fade" role="dialog" data-id="">
       <div class="modal-dialog">
 
-        <!-- Modal content-->
+         Modal content
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h3 class="modal-title">Produto:</h3>
+            <h3 class="modal-title" id="hConsProduto">Produto:</h3>
           </div>
           <div class="modal-body">
             
-            <div class="row linha">
-              <div class="col-xs-12">
-                <label for="">Nome:</label>
-                <input class="form-control" type="text" readonly id="nomeConsProd">
-              </div>
-            </div>
+            <div id="moInnerCons">
 
-            <div class="row linha">
-              <div class="col-xs-12">
-                <label for="">Descrição:</label>
-                <input class="form-control" type="text" readonly id="descConsProd">
-              </div>
-            </div>
-
-            <div class="row linha">
-              <div class="col-xs-6">
-                <label for="">Quantidade:</label>
-                <input class="form-control" type="number" readonly>
-              </div>
-              <div class="col-xs-6">
-                <label for="">Valor (por unidade):</label>
-                <input class="form-control" type="number" readonly id="valorConsProd">
-              </div>
-            </div>
-
-            <div class="row linha">
-              <div class="col-xs-12">
-                <label for="">Foto:</label>
-                <img class="img-responsive" src="" alt="">
-              </div>
             </div>
 
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAltQt">
-              <span class="glyphicon glyphicon-briefcase"></span>
-            </button>
-            <button type="button" class="btn btn-primary" id="btnAltProd">
-              <span class="glyphicon glyphicon-pencil"></span>
-            </button>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDeletarProd">
-              <span class="glyphicon glyphicon-trash"></span>
-            </button>
+          <div class="modal-footer" id="moFooterCons">
+            
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- Modal de alterar quantidade -->
-    <div id="modalAltQt" class="modal fade" role="dialog">
+    <!-- Modal de alterar quantidade 
+    <div id="modalAltQt" class="modal fade" role="dialog" data-id="">
       <div class="modal-dialog">
 
-        <!-- Modal content-->
+        <!-- Modal content
         <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title">Aumente/diminua a quantidade:</h3>
           </div>
           <div class="modal-body">
-            
-            <div class="row linha">
-              <div class="col-xs-12">
-                <label for="">Quantidade a ser adicionada/removida:</label>
-                <input class="form-control" type="number" min="1" max="99" maxlength="2">
-              </div>
-            </div>
+            <div id="moInnerQt">
 
+            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
-            <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-minus"></span></button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+          <div class="modal-footer" id="moFooterQt">
+            
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- Modal de deletar produto -->
+    <!-- Modal de deletar produto 
     <div id="modalDeletarProd" class="modal fade" role="dialog">
       <div class="modal-dialog">
 
-        <!-- Modal content-->
+        <!-- Modal content
         <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title">Deseja mesmo remover o produto?</h3>
           </div>
           <div class="modal-body">
-            
-            <div class="row linha">
-              <div class="col-xs-12">
-                <label for="">Caso sim, insira a sua senha:</label>
-                <input class="form-control" type="text">
-              </div>
-            </div>
+            <div id="moInnerDel">
 
+            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+          <div class="modal-footer" id="moFooterDel">
+            
           </div>
         </div>
 
       </div>
-    </div>
+    </div>-->
 
 
 
