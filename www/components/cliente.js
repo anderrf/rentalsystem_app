@@ -3,7 +3,7 @@
 function listarCliente() {
   $.ajax({
     type: "post",
-    url: "https://rentalsystempm.000webhostapp.com/cliente/listarClienteBasico.php",
+    url: "https://rentalsystempm.000webhostapp.com/php/cliente/listarClienteBasico.php",
     dataType: "json",
     success: function (data) {
       var regCliente = "";
@@ -33,7 +33,7 @@ $(document).on("click", ".itemProd", function () {
 function setModal(codCliente) {
   $.ajax({
     type: "post",
-    url: "https://rentalsystempm.000webhostapp.com/cliente/mostrarClienteBasico.php",
+    url: "https://rentalsystempm.000webhostapp.com/php/cliente/mostrarClienteBasico.php",
     data: "codCliente=" + codCliente,
     dataType: "json",
     success: function (data) {
@@ -51,7 +51,7 @@ function setModal(codCliente) {
 function modDeletar(codCliente) {
   document.getElementById('hCliente').textContent = "Deseja mesmo deletar o cliente?";
   var contDeletar = "";
-  contDeletar += "<div class='row linha'><div class='col-xs-12'><label for=''>Confirme a sua senha:</label><input class='form-control' type='text' id='senhaDeletarCliente'></div></div>";
+  contDeletar += "<div class='row linha'><div class='col-xs-12'><label for=''>Confirme a sua senha:</label><input class='form-control' type='password' id='senhaDeletarCliente'></div></div>";
   $("#moInner").html(contDeletar);
   var ftDeletar = "";
   ftDeletar += "<button type='button' class='btn btn-success' id='btnConfirmarDeletar' onclick='confirmarDeletar(" + codCliente + ")'>Confirmar</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancelar</span></button>";
@@ -59,17 +59,29 @@ function modDeletar(codCliente) {
 };
 
 function confirmarDeletar(codCliente) {
-  $.ajax({
-    type: "post",
-    url: "https://rentalsystempm.000webhostapp.com/cliente/desabilitarCliente.php",
-    data: "codigo=" + codCliente,
-    success: function (data) {
-      location.reload();
-    },
-    error: function (data) {
-      navigator.notification.alert(data);
-    }
-  });
+  if ($("#senhaDeletarCliente").val() != "") {
+    var form_data = new FormData();
+    form_data.append("codigo", codCliente);
+    form_data.append("senha", $("#senhaDeletarCliente").val());
+    $.ajax({
+      type: "post",
+      url: "https://rentalsystempm.000webhostapp.com/php/cliente/desabilitarCliente.php",
+      data: form_data,
+      contentType: false,
+      cache: false,
+      processData: false,
+      success: function (data) {
+        navigator.notification.alert(data);
+        location.reload();
+      },
+      error: function (data) {
+        navigator.notification.alert(data);
+      }
+    });
+  }
+  else{
+    navigator.notification.alert("Preencha o campo de senha.");
+  }
 }
 
 $(document).on("click", "#btnPesquisarCliente", function () {
@@ -77,7 +89,7 @@ $(document).on("click", "#btnPesquisarCliente", function () {
   if (pesquisa.length > 3) {
     $.ajax({
       type: "post",
-      url: "https://rentalsystempm.000webhostapp.com/cliente/pesquisarClienteBasico.php",
+      url: "https://rentalsystempm.000webhostapp.com/php/cliente/pesquisarClienteBasico.php",
       data: "pesquisa=" + pesquisa,
       dataType: "json",
       success: function (data) {
@@ -93,7 +105,7 @@ $(document).on("click", "#btnPesquisarCliente", function () {
     });
   }
   else {
-    navigator.notification.alert("Conteúdo digitado é insuficiente para a pesquisa.")
+    navigator.notification.alert("Conteúdo digitado é insuficiente para a pesquisa.");
   }
 
 });

@@ -18,6 +18,7 @@
 .contgray{
   background-color: black;
   margin-top: 12vh;
+  color: white;
 }
 
 .botaolink{
@@ -115,10 +116,6 @@ h2{
   text-align: center;
 }
 
-.local{
-  color: #ff825c;
-}
-
 .btnMenu{
   height: 7vh;
 }
@@ -160,6 +157,7 @@ a click{
   background-color: gainsboro;
   border-radius: 5px;
   margin: 15px 0 15px 0;
+  color: black;
 }
 
 .imgProd{

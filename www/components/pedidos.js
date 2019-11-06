@@ -1,6 +1,6 @@
 // This is a JavaScript file
 
-$(document).ready(function () {
+function mapa(){
     var onSuccess = function (position) {
       $("#valLat").val(position.coords.latitude);
       $("#valLng").val(position.coords.longitude);

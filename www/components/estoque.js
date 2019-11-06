@@ -22,7 +22,7 @@ $(document).on("click", "#btnCadProd", function () {
     form_data.append("valor", $("#valorCadProd").val());
 
     $.ajax({
-      url: "https://rentalsystempm.000webhostapp.com/estoque/cadProduto.php",
+      url: "https://rentalsystempm.000webhostapp.com/php/estoque/cadProduto.php",
       method: "post",
       data: form_data,
       contentType: false,
@@ -40,7 +40,7 @@ $(document).on("click", "#btnCadProd", function () {
 function listarProduto() {
   $.ajax({
     type: "post",
-    url: "https://rentalsystempm.000webhostapp.com/estoque/listarProduto.php",
+    url: "https://rentalsystempm.000webhostapp.com/php/estoque/listarProduto.php",
     dataType: "json",
     //se der certo
     success: function (data) {
@@ -76,7 +76,7 @@ function desabilita() {
 $(document).on("click", "#addProduto", function () {
   document.getElementById('hProduto').textContent = "Cadastre o produto:";
   var contCadProduto = "";
-  contCadProduto += "<div class='row linha'><div class='col-xs-12'><label for=''>Nome:</label><input class='form-control' type='text' id='nomeCadProd'></div></div><div class='row linha'><div class='col-xs-12'><label for=''>Descrição:</label><input class='form-control' type='text'  id='descCadProd'></div></div><div class='row linha'><div class='col-xs-6'><label for=''>Quantidade:</label><input class='form-control' type='number'  id='quantCadProd'></div><div class='col-xs-6'><label for=''>Valor (por unidade):</label><input class='form-control' type='number'  id='valorCadProd'></div></div><div class='row linha'><div class='col-xs-12'><label for=''>Foto:</label><input class='form-control' type='file' id='foto'></div></div>";
+  contCadProduto += "<div class='row linha'><div class='col-xs-12'><label for=''>Nome:</label><select class='form-control' id='nomeCadProd'><option value='Mesa'>Mesa</option><option value='Cadeira'>Cadeira</option><option value='Toalha'>Toalha</option></select></div></div><div class='row linha'><div class='col-xs-12'><label for=''>Descrição:</label><input class='form-control' type='text'  id='descCadProd'></div></div><div class='row linha'><div class='col-xs-6'><label for=''>Quantidade:</label><input class='form-control' type='number'  id='quantCadProd'></div><div class='col-xs-6'><label for=''>Valor (por unidade):</label><input class='form-control' type='number'  id='valorCadProd'></div></div><div class='row linha'><div class='col-xs-12'><label for=''>Foto:</label><input class='form-control' type='file' id='foto'></div></div>";
   $("#moInner").html(contCadProduto);
   var ftCadProduto = "";
   ftCadProduto += "<button type='button' class='btn btn-success' id='btnCadProd'>Cadastrar</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancelar</button>";
@@ -103,7 +103,7 @@ $(document).on("click", ".itemProd", function () {
 function mostrarProduto(codProduto) {
   $.ajax({
     type: "post",
-    url: "https://rentalsystempm.000webhostapp.com/estoque/mostrarProduto.php",
+    url: "https://rentalsystempm.000webhostapp.com/php/estoque/mostrarProduto.php",
     data: "codProduto=" + codProduto,
     dataType: "json",
     success: function (data) {
@@ -150,7 +150,7 @@ function addQtProduto(codProduto) {
     form_data.append("qtAddProduto", qtAddProduto);
     $.ajax({
       type: "post",
-      url: "https://rentalsystempm.000webhostapp.com/estoque/addQtProduto.php",
+      url: "https://rentalsystempm.000webhostapp.com/php/estoque/addQtProduto.php",
       data: form_data,
       contentType: false,
       cache: false,
@@ -174,7 +174,7 @@ function minQtProduto(codProduto) {
     form_data.append("qtAddProduto", qtAddProduto);
     $.ajax({
       type: "post",
-      url: "https://rentalsystempm.000webhostapp.com/estoque/minQtProduto.php",
+      url: "https://rentalsystempm.000webhostapp.com/php/estoque/minQtProduto.php",
       data: form_data,
       contentType: false,
       cache: false,
@@ -204,7 +204,7 @@ function salvarAlterar() {
     form_data.append("valor", $("#valorConsProd").val());
 
     $.ajax({
-      url: "https://rentalsystempm.000webhostapp.com/estoque/alterarProduto.php",
+      url: "https://rentalsystempm.000webhostapp.com/php/estoque/alterarProduto.php",
       method: "post",
       data: form_data,
       contentType: false,
@@ -223,7 +223,7 @@ function btnDeletarProduto() {
   var codProduto = $("#codigoConsProd").val();
   document.getElementById('hProduto').textContent = "Deseja mesmo excluir este produto?";
   var contDeletarProduto = "";
-  contDeletarProduto += "<div class='row linha'><div class='col-xs-12'><label for=''>Caso sim, insira a sua senha:</label><input class='form-control' type='text' id='inpSenhaDeletarProduto'></div></div>";
+  contDeletarProduto += "<div class='row linha'><div class='col-xs-12'><label for=''>Caso sim, insira a sua senha:</label><input class='form-control' type='password' id='inpSenhaDeletarProduto'></div></div>";
   $("#moInner").html(contDeletarProduto);
   var ftDeletarProduto = "";
   ftDeletarProduto += "<button type='button' class='btn btn-success' id='btnConfirmaDeletarProduto' onclick='btnConfirmaDeletarProduto(" + codProduto + ")'>Deletar</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancelar</button>";
@@ -231,16 +231,27 @@ function btnDeletarProduto() {
 }
 
 function btnConfirmaDeletarProduto(codProduto) {
-  $.ajax({
-    type: "post",
-    url: "https://rentalsystempm.000webhostapp.com/estoque/deletarProduto.php",
-    data: "codProduto=" + codProduto,
-    success: function (data) {
-      navigator.notification.alert(data);
-      location.reload();
-    },
-    error: function (data) {
-      navigator.notification.alert(data);
-    }
-  });
+  if ($("#inpSenhaDeletarProduto").val() != "") {
+    var form_data = new FormData();
+    form_data.append("codProduto", codProduto);
+    form_data.append("senha", $("#inpSenhaDeletarProduto").val());
+    $.ajax({
+      type: "post",
+      url: "https://rentalsystempm.000webhostapp.com/php/estoque/deletarProduto.php",
+      data: form_data,
+      contentType: false,
+      cache: false,
+      processData: false,
+      success: function (data) {
+        navigator.notification.alert(data);
+        location.reload();
+      },
+      error: function (data) {
+        navigator.notification.alert(data);
+      }
+    });
+  }
+  else{
+    navigator.notification.alert("Preencha o campo de senha.");
+  }
 }
