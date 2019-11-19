@@ -10,6 +10,11 @@
   <script src="components/bootstrap.min.js"></script>
   <script src="components/acao.js"></script>
   <script src="components/novosPedidos.js"></script>
+  <script>
+    $(document).ready(function(){
+      listarNovosPedidos();
+    });
+  </script>
 
   <link rel="stylesheet" href="components/loader.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -33,17 +38,6 @@
   <div class="container contgray">
 
     <div id="itemPedido">
-
-      <div class="row linha itemProd" data-toggle="modal" data-target="#modalNovoPedido">
-        <div class="col-xs-12">
-          <label for="">Cliente:</label><br>
-          <label for="">Endereço:</label><br>
-          <label for="">Data:</label><br>
-          <label for="">Valor:</label><br>
-        </div>
-      </div>
-
-      <hr>
 
     </div>
 

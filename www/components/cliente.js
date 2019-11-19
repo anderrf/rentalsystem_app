@@ -22,11 +22,11 @@ $(document).on("click", ".itemProd", function () {
   var codCliente = $(this).data('id');
   document.getElementById('hCliente').textContent = "Cliente:";
   var contCliente = "";
-  contCliente += "<div class='row linha'><div class='col-xs-12'><label for=''>Nome:</label><input class='form-control' type='text' readonly id='inpNome'></div></div><div class='row linha'><div class='col-xs-12'><label for=''>Telefone:</label><input class='form-control' type='text' readonly id='inpTelefone'></div></div><div class='row linha'><div class='col-xs-12'><label for=''>Endereço:</label><input class='form-control' type='text' readonly id='inpEndereco'></div></div><div class='row linha'><div class='col-xs-12'><label for=''>E-mail:</label><input class='form-control' type='text' readonly id='inpEmail'></div></div>";
+  contCliente += "<div class='row linha'><div class='col-xs-12'><label for=''>Nome:</label><input class='form-control' type='text' readonly id='inpNome'></div></div><div class='row linha'><div class='col-xs-12'><label for=''>Telefone:</label><input class='form-control' type='text' readonly id='inpTelefone'></div></div><div class='row linha'><div class='col-xs-12'><label for=''>Endereço:</label><input class='form-control' type='text' readonly id='inpEndereco'></div></div><div class='row linha'><div class='col-xs-12'><label for=''>E-mail:</label><input class='form-control' type='text' readonly id='inpEmail'></div></div><div class='row linha' id='rowFoto'><div class='col-xs-12'><label for=''>Foto:</label><img class='img-responsive' id='fotoCliente'></div></div>";
   $("#moInner").html(contCliente);
-  var ftCliente = "";
-  ftCliente += "<button type='button' class='btn btn-danger' id='btnDeletar' onclick='modDeletar(" + codCliente + ")'>Deletar</button>";
-  $("#moFooter").html(ftCliente);
+  //var ftCliente = "";
+  //ftCliente += "<button type='button' class='btn btn-danger' id='btnDeletar' onclick='modDeletar(" + codCliente + ")'>Deletar</button>";
+  //$("#moFooter").html(ftCliente);
   setModal(codCliente);
 });
 
@@ -41,9 +41,17 @@ function setModal(codCliente) {
       $("#inpTelefone").val(data.cliente.telefone);
       $("#inpEndereco").val(data.cliente.endereco);
       $("#inpEmail").val(data.cliente.email);
+      if((data.cliente.foto == null) || (data.cliente.foto == '') || (data.cliente.foto == ' ')){
+
+      }
+      else{
+        $("#rowFoto").prop("hidden", false);
+        $("#fotoCliente").attr("src", "https://rentalsystempm.000webhostapp.com/" + data.cliente.foto);
+      }
+       
     },
     error: function (data) {
-
+      navigator.notification.alert(data);
     }
   });
 }

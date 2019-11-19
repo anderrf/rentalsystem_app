@@ -38,4 +38,4 @@ function mapa(){
   }
 
   navigator.geolocation.getCurrentPosition(mapa);
-});
+};

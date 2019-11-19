@@ -3,7 +3,7 @@
 function setPedidoAgendado(regPedidoAgendado)
 {
 
-  $(location).attr("href", "pedidoAgendado.html?cd_pedido="+regPedidoAgendado+"");
+
 
 }
 

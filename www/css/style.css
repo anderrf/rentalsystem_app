@@ -178,3 +178,7 @@ label>strong{
   width: 100%;
   text-align: center;
 }
+
+.modal-content{
+  color: black;
+}

@@ -42,16 +42,82 @@
 
   <div class="container contgray">
 
-    <div class="row linha itemProd" name="regEntregaAgendada" value="" onclick="setPedidoAgendado(this.value)">
-      <div class="col-xs-12">
-        <label for="">Cliente:</label><br>
-        <label for="">Endereço:</label><br>
-        <label for="">Data:</label><br>
-        <label for="">Valor:</label><br>
-      </div>
-    </div>
+    <div id="divLista">
 
-    <hr>
+      <div class="row linha itemProd" name="regEntregaAgendada" value="">
+        <div class="col-xs-12">
+          <label for="">Cliente:</label><br>
+          <label for="">Endereço:</label><br>
+          <label for="">Data:</label><br>
+          <label for="">Valor:</label><br>
+        </div>
+      </div>
+
+    </div>
+    <div id="divMostra">
+
+      <div class="row linha">
+        <div class="col-xs-12">
+          <p><strong>Endereço:</strong></p>
+        </div>
+      </div>
+
+      <div class="row linha">
+        <div class="col-xs-12">
+          <p><strong>Cliente</strong>:</p>
+          <p id="cliente"></p>
+        </div>
+      </div>
+
+      <div class="row linha">
+        <div class="col-xs-12">
+          <h4>Entrega:</h4>
+          <div class="col-xs-6">
+            <p><strong>Data:</strong></p>
+            <p id="dataEntrega"></p>
+          </div>
+          <div class="col-xs-6">
+            <p><strong>Horário:</strong></p>
+            <p id="horaEntrega"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row linha">
+        <div class="col-xs-12">
+          <h4>Retirada:</h4>
+          <div class="col-xs-6">
+            <p><strong>Data:</strong></p>
+            <p id="dataRetirada"></p>
+          </div>
+          <div class="col-xs-6">
+            <p><strong>Horário:</strong></p>
+            <p id="horaRetirada"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row linha">
+        <div class="col-xs-6">
+          <p><strong>Feito em:</strong></p>
+          <p id="dataPedido"></p>
+        </div>
+        <div class="col-xs-6">
+          <p><strong>Valor:</strong></p>
+          <p id="valor"></p>
+        </div>
+      </div>
+
+      <div class="row linha">
+        <div class="col-xs-12">
+          <div id="map">
+            <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+            <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css" />
+          </div>
+        </div>
+      </div>
+
+    </div>
 
   </div>
 </body>
