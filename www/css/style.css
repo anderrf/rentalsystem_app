@@ -182,3 +182,15 @@ label>strong{
 .modal-content{
   color: black;
 }
+
+table{
+  width: 100%;
+}
+
+tr, th, td{
+  border: white 1px solid;
+}
+
+td>label{
+  margin-left: 3px;
+}

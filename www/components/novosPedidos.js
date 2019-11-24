@@ -47,8 +47,9 @@ function listarNovosPedidos() {
 $(document).on("click", ".itemProd", function () {
   var codigo = $(this).data('id');
   $("#hPedido").val("Pedido");
+  $("#hPedido").attr("value", codigo);
   var contPedido = "";
-  contPedido += "<div class='row linha'><div class='col-xs-12'><label for=''>Cliente:</label><input class='form-control' type='text' id='cliente' readonly></div></div><div class='row linha'><div class='col-xs-12'><label for=''>Endereço:</label><input class='form-control' type='text' id='endereco' readonly></div></div><div class='row linha'><div class='col-xs-12'><h4>Entrega:</h4><div class='row'><div class='col-xs-6'><label for=''>Data:</label><input class='form-control' type='text' id='dataEntrega' readonly></div><div class='col-xs-6'><label for=''>Horário:</label><input class='form-control' type='text' id='horaEntrega' readonly></div></div></div></div><div class='row linha'><div class='col-xs-12'><h4>Retirada:</h4><div class='row'><div class='col-xs-6'><label for=''>Data:</label><input class='form-control' type='text' id='dataRetirada' readonly></div><div class='col-xs-6'><label for=''>Horário:</label><input class='form-control' type='text' id='horaRetirada' readonly></div></div></div></div> <div class='row linha'><div class='col-xs-6'><label for=''>Feito em:</label><input class='form-control' type='text' id='dataPedido' readonly ></div><div class='col-xs-6'><label for=''>Valor:</label><input class='form-control' type='number' id='valor' readonly ></div></div>";
+  contPedido += "<div class='row linha'><div class='col-xs-12'><label for=''>Cliente:</label><input class='form-control' type='text' id='cliente' readonly></div></div><div class='row linha'><div class='col-xs-12'><label for=''>Endereço:</label><input class='form-control' type='text' id='endereco' readonly></div></div><div class='row linha'><div class='col-xs-12'><label for=''>Referência:</label><input class='form-control' type='text' id='referencia' readonly></div></div><div class='row linha'><div class='col-xs-12'><h4>Entrega:</h4><div class='row'><div class='col-xs-6'><label for=''>Data:</label><input class='form-control' type='text' id='dataEntrega' readonly></div><div class='col-xs-6'><label for=''>Horário:</label><input class='form-control' type='text' id='horaEntrega' readonly></div></div></div></div><div class='row linha'><div class='col-xs-12'><h4>Retirada:</h4><div class='row'><div class='col-xs-6'><label for=''>Data:</label><input class='form-control' type='text' id='dataRetirada' readonly></div><div class='col-xs-6'><label for=''>Horário:</label><input class='form-control' type='text' id='horaRetirada' readonly></div></div></div></div><div class='row linha'><div class='col-xs-12'><h4>Produtos:</h4><div class='row linha'><div class='col-xs-2'><label>Mesas:</label></div><div class='col-xs-5'></div><div class='col-xs-5'><input class='form-control' type='number' id='mesas' readonly></div></div><div class='row linha'><div class='col-xs-2'><label>Cadeiras:</label></div><div class='col-xs-5'></div><div class='col-xs-5'><input class='form-control' type='number' id='cadeiras' readonly></div></div><div class='row linha'><div class='col-xs-2'><label>Toalhas:</label></div><div class='col-xs-5'><input class='form-control' type='text' id='corToalha' readonly></div><div class='col-xs-5'><input class='form-control' type='number' id='toalhas' readonly></div></div></div></div><div class='row linha'><div class='col-xs-6'><label for=''>Feito em:</label><input class='form-control' type='text' id='dataPedido' readonly ></div><div class='col-xs-6'><label for=''>Valor:</label><input class='form-control' type='number' id='valor' readonly ></div></div>";
   $("#moInner").html(contPedido);
   var optPedido = "";
   optPedido += "<button type='button' class='btn btn-success' id='btnAceitarPedido'>Aceitar</button><button type='button' class='btn btn-danger' id='btnNegarPedido'>Negar</button>";
@@ -65,6 +66,7 @@ function setModal(codigo){
     success: function(data){
       $("#cliente").val(data.pedido.cliente);
       $("#endereco").val(data.pedido.endereco+", "+data.pedido.numero+", "+data.pedido.bairro+", "+data.pedido.cidade+", "+data.pedido.UF);
+      $("#referencia").val(data.pedido.referencia);
       //Entrega
       var dataEntrega = new Date(data.pedido.dataEntrega);
       if(dataEntrega.getDate() < 10){
@@ -125,6 +127,21 @@ function setModal(codigo){
         }
       }
       $("#horaRetirada").val(horaRetirada+":"+minRetirada);
+      //Produtos
+      $("#mesas").val(data.pedido.qt_mesas);
+      $("#cadeiras").val(data.pedido.qt_cadeiras);
+      if(((data.pedido.corToalha) != null) && ((data.pedido.corToalha) != '')){
+        $("#corToalha").val(data.pedido.corToalha);
+      }
+      else{
+        $("#corToalha").val("Nenhuma");
+      }
+      if(((data.pedido.qt_toalhas) != null) && ((data.pedido.qt_toalhas) != '')){
+        $("#toalhas").val(data.pedido.qt_toalhas);
+      }
+      else{
+        $("#toalhas").val(0);
+      }
       //Pedido
       var dataPedido = data.pedido.dataPedido;
       var datePedido = new Date(dataPedido);
@@ -138,25 +155,62 @@ function setModal(codigo){
       $("#valor").val(data.pedido.valor);
     },
     error: function(data){
-      alert(data);
+      navigator.notification.alert(data);
     }
   })
 }
 
 $(document).on("click", "#btnAceitarPedido", function () {
-
+  var codigo = $("#hPedido").attr("value");
+  $.ajax({
+    type: "post",
+    url: "https://rentalsystempm.000webhostapp.com/php/pedido/agendarPedido.php",
+    data: "codigo="+codigo,
+    success: function(data){
+      navigator.notification.alert(data);
+      location.reload();
+    },
+    error: function(data){
+      navigator.notification.alert(data);
+    }
+  });
 });
 
 $(document).on("click", "#btnNegarPedido", function () {
   $("#hPedido").val("Deseja negar o pedido?");
   var contNegar = "";
-  contNegar += "<div class='row linha'><div class='col-xs-12'><label>Informe o motivo:</label></div></div><div class='row linha'><div class='col-xs-12'><input type='radio' name='negacao' value='estoque'>Indisponibilidade de estoque</div></div><div class='row linha'><div class='col-xs-12'><input type='radio' name='negacao' value='tempo'>Indisponibilidade de tempo</div></div>";
+  contNegar += "<div class='row linha'><div class='col-xs-12'><label>Informe o motivo:</label></div></div><div class='row linha'><div class='col-xs-12'><select class='form-control' id='motivoRecusa'><option value=''></option><option value='Indisponibilidade de tempo'>Indisponibilidade de tempo</option><option value='Indisponibilidade de estoque'>Indisponibilidade de estoque</option></select></div>";
   $("#moInner").html(contNegar);
   optNegar = "";
-  var optNegar = "<button type='button' class='btn btn-success' data-dismiss='modal'>Cancelar</button><button type='button' class='btn btn-danger' id='btnConfirmarNegar'>Negar</button>";
+  var optNegar = "<button type='button' class='btn btn-success' data-dismiss='modal'>Voltar</button><button type='button' class='btn btn-danger' id='btnConfirmarNegar'>Negar</button>";
   $("#moFooter").html(optNegar);
 });
 
 $(document).on("click", "#btnConfirmarNegar", function () {
-
+  var codigo = $("#hPedido").attr("value");
+  var motivoRecusa = $("#motivoRecusa").val();
+  if((motivoRecusa != null) && (motivoRecusa != '') && (motivoRecusa != ' ')){
+    var form_data = new FormData();
+    form_data.append("codigo", codigo);
+    form_data.append("motivoRecusa", motivoRecusa);
+    $.ajax({
+      type: "post",
+      url: "https://rentalsystempm.000webhostapp.com/php/pedido/recusarPedido.php",
+      data: form_data,
+      contentType: false,
+      cache: false,
+      processData: false,
+      success: function(data){
+        navigator.notification.alert(data);
+        location.reload();
+      },
+      error: function(data){
+        navigator.notification.alert(data);
+      }
+    });
+  }
+  else{
+    navigator.notification.alert("Informe o motivo de recusa.");
+  }
+  /**/
 });
