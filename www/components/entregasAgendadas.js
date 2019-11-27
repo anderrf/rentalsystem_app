@@ -5,11 +5,13 @@ var opcaoAgendado;
 function verOpcaoAgendado() {
   if (opcaoAgendado == "lista") {
     $("#divLista").prop("hidden", false);
+    $("#grpPesqAgendada").prop("hidden", false);
     $("#divMostra").prop("hidden", true);
     listarPedidoAgendado();
   }
   else if (opcaoAgendado == "Mostra") {
     $("#divLista").prop("hidden", true);
+    $("#grpPesqAgendada").prop("hidden", true);
     $("#divMostra").prop("hidden", false);
   }
 }
@@ -41,11 +43,12 @@ $(document).on("click", "#btnPesquisaAgendada", function () {
       cache: false,
       processData: false,
       success: function (data) {
+        opcaoAgendado = "lista";
         $("#divMostra").prop("hidden", true);
         $("#divLista").prop("hidden", false);
-        opcaoAgendado = "lista";
         var novoPedido = "";
         $.each(data.pedido, function (i, dados) {
+          navigator.notification.alert(dados.endereco);
           var dataEntrega = (dados.dataEntrega);
           var dateEntrega = new Date(dataEntrega);
           if (dateEntrega.getHours() < 10) {
@@ -70,7 +73,6 @@ $(document).on("click", "#btnPesquisaAgendada", function () {
           }
           novoPedido += "<div class='row linha itemProd' data-id='" + dados.codigo + "'><div class='col-xs-12'><label for=''><strong>Cliente:</strong><br>" + dados.cliente + "</label><br><label for=''><strong>Endereço:</strong><br>" + dados.endereco + ", " + dados.numero + ", " + dados.bairro + ", " + dados.cidade + ", " + dados.UF + "</label><br><label for=''><strong>Entrega: </strong><br>" + (dateEntrega.getDate() + "/" + (dateEntrega.getMonth() + 1) + "/" + dateEntrega.getFullYear() + ", às " + horaEntrega + ":" + minEntrega) + "</label><br><label for=''><strong>Valor:</strong><br>R$ " + dados.valor + "</label><br></div></div>";
         });
-        
         $("#divLista").html(novoPedido);
       },
       error: function (data) {
@@ -136,7 +138,7 @@ function setPedidoAgendado(codigo) {
     url: "https://rentalsystempm.000webhostapp.com/php/pedido/mostrarPedidoCompleto.php",
     data: "codigo=" + codigo,
     dataType: "json",
-    success: function (data) {
+    success: function(data) {
       document.getElementById('endereco').textContent = (data.pedido.endereco + ", " + data.pedido.numero + ", " + data.pedido.bairro + ", " + data.pedido.cidade + ", " + data.pedido.UF);
       document.getElementById('referencia').textContent = (data.pedido.referencia);
       document.getElementById('cliente').textContent = (data.pedido.cliente);
@@ -287,7 +289,7 @@ function mapa(numero, endereco, bairro, cidade, UF) {
   });
   
   L.mapquest.directions().route({
-    start: {street: '496 Rua São Miguel', city: 'Mongaguá', state: 'São Paulo', country: 'Brazil'},
+    start: {street: '496 Rua São Miguel', neighborhood: 'Agenor de Campos', city: 'Mongaguá', state: 'São Paulo', country: 'Brazil'},
     end: {street: (numero+' '+endereco), neighborhood: (bairro), city: (cidade), state: (UF), country: 'Brazil'}
   });
   

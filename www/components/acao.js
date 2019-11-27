@@ -21,18 +21,24 @@ $(document).on("click", "#btnEntradaLogin", function () {
       cache: false,
       processData: false,
       success: function (data) {
-        if ((data.cliente.nome) == (data.cliente.nomeVerificar)) {
-          if ((data.cliente.senha) == (data.cliente.senhaVerificar)) {
-            $(location).attr("href", "menu.html");
+        if((data == '') || (data == null)){
+          navigator.notification.alert("Acesso negado.");
+          location.reload();
+        }
+        else{
+          if ((data.cliente.nome) == (data.cliente.nomeVerificar)) {
+            if ((data.cliente.senha) == (data.cliente.senhaVerificar)) {
+              $(location).attr("href", "menu.html");
+            }
+            else {
+              navigator.notification.alert("Acesso negado.");
+              location.reload();
+            }
           }
           else {
             navigator.notification.alert("Acesso negado.");
             location.reload();
           }
-        }
-        else {
-          navigator.notification.alert("Acesso negado.");
-          location.reload();
         }
       },
       error: function (data) {

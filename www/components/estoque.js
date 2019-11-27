@@ -59,14 +59,14 @@ function listarProduto() {
 }
 
 function habilita() {
-  $("#nomeConsProd").prop("readonly", false);
+  $("#nomeConsProd").prop("disabled", true);
   $("#descConsProd").prop("readonly", false);
   $("#valorConsProd").prop("readonly", false);
   $("#altFoto").prop("hidden", false);
 }
 
 function desabilita() {
-  $("#nomeConsProd").prop("readonly", true);
+  $("#nomeConsProd").prop("disabled", true);
   $("#descConsProd").prop("readonly", true);
   $("#valorConsProd").prop("readonly", true);
   $("#altFoto").prop("hidden", true);

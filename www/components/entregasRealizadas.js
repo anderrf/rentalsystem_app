@@ -5,11 +5,13 @@ var opcaoRealizado;
 function verOpcaoRealizado() {
   if (opcaoRealizado == "lista") {
     $("#divLista").prop("hidden", false);
+    $("#grpPesqRealizada").prop("hidden", false);
     $("#divMostra").prop("hidden", true);
     listarPedidoRealizado();
   }
   else if (opcaoRealizado == "Mostra") {
     $("#divLista").prop("hidden", true);
+    $("#grpPesqRealizada").prop("hidden", true);
     $("#divMostra").prop("hidden", false);
   }
 }
