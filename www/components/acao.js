@@ -5,7 +5,7 @@ $(document).on("click", "#btnEntradaInicial", function () {
 });
 
 $(document).on("click", "#btnEntradaLogin", function () {
-  if ($("#loginInicial").val() == "" || $("#senhaInicial").val() == "") {
+  if (($("#loginInicial").val() == "") || ($("#senhaInicial").val() == "")) {
     navigator.notification.alert("Preencha todos os campos.");
   }
   else {
@@ -21,19 +21,13 @@ $(document).on("click", "#btnEntradaLogin", function () {
       cache: false,
       processData: false,
       success: function (data) {
-        if((data == '') || (data == null)){
+        if ((data == '') || (data == null)) {
           navigator.notification.alert("Acesso negado.");
           location.reload();
         }
-        else{
-          if ((data.cliente.nome) == (data.cliente.nomeVerificar)) {
-            if ((data.cliente.senha) == (data.cliente.senhaVerificar)) {
-              $(location).attr("href", "menu.html");
-            }
-            else {
-              navigator.notification.alert("Acesso negado.");
-              location.reload();
-            }
+        else {
+          if (data == true) {
+            $(location).attr("href", "menu.html");
           }
           else {
             navigator.notification.alert("Acesso negado.");
@@ -42,7 +36,8 @@ $(document).on("click", "#btnEntradaLogin", function () {
         }
       },
       error: function (data) {
-        navigator.notification.alert(data);
+        navigator.notification.alert("Acesso negado.");
+        location.reload();
       }
     });
   }

@@ -67,62 +67,6 @@ function listarPedidoRealizado() {
   });
 }
 
-$(document).on("click", "#btnPesquisaRealizada", function () {
-  var pesquisa = $("#pesquisaRealizada").val();
-  if (pesquisa.length < 3) {
-    navigator.notification.alert("Conteúdo digitado é insuficiente para a pesquisa.");
-  }
-  else {
-    var status = 03;
-    var form_data = new FormData();
-    form_data.append("pesquisa", pesquisa);
-    form_data.append("status", status);
-    $.ajax({
-      type: "post",
-      url: "https://rentalsystempm.000webhostapp.com/php/pedido/pesquisarPedidoApp.php",
-      data: form_data,
-      contentType: false,
-      cache: false,
-      processData: false,
-      success: function (data) {
-        opcaoAgendado = "lista";
-        var novoPedido = "";
-        $.each(data.pedido, function (i, dados) {
-          var dataRetirada = (dados.dataRetirada);
-          var dateRetirada = new Date(dataRetirada);
-          if (dateRetirada.getHours() < 10) {
-            if (dateRetirada.getMinutes() < 10) {
-              var horaRetirada = "0" + dateRetirada.getHours();
-              var minRetirada = "0" + dateRetirada.getMinutes();
-            }
-            else {
-              var horaRetirada = "0" + dateRetirada.getHours();
-              var minRetirada = dateRetirada.getMinutes();
-            }
-          }
-          else {
-            if (dateRetirada.getMinutes() < 10) {
-              var horaRetirada = dateRetirada.getHours();
-              var minRetirada = "0" + dateRetirada.getMinutes();
-            }
-            else {
-              var horaRetirada = dateRetirada.getHours();
-              var minRetirada = dateRetirada.getMinutes();
-            }
-          }
-          novoPedido += "<div class='row linha itemProd' data-id='" + dados.codigo + "'><div class='col-xs-12'><label for=''><strong>Cliente:</strong><br>" + dados.cliente + "</label><br><label for=''><strong>Endereço:</strong><br>" + dados.endereco + ", " + dados.numero + ", " + dados.bairro + ", " + dados.cidade + ", " + dados.UF + "</label><br><label for=''><strong>Retirada: </strong><br>" + (dateRetirada.getDate() + "/" + (dateRetirada.getMonth() + 1) + "/" + dateRetirada.getFullYear() + ", às " + horaRetirada + ":" + minRetirada) + "</label><br><label for=''><strong>Valor:</strong><br>R$ " + dados.valor + "</label><br></div></div>";
-        });
-        $("#divMostra").prop("hidden", true);
-        $("#divLista").prop("hidden", false);
-        $("#divLista").html(novoPedido);
-      },
-      error: function (data) {
-        alert(data);
-      }
-    });
-  }
-});
-
 $(document).on("click", ".itemProd", function () {
   var codigo = $(this).data('id');
   opcaoRealizado = "Mostra";

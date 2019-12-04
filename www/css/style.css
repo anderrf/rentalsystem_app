@@ -80,7 +80,7 @@ h2{
 }
 
 .navbar-fixed-top{
-  background-color: red;
+  background-color: #b22222;
   height: 12vh;
   max-width: 100vw;
 }
@@ -170,7 +170,7 @@ a click{
 }
 
 label>strong{
-  color: red;
+  color:  #b22222;
 }
 
 #map{

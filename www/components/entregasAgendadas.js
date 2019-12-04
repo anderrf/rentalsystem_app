@@ -2,83 +2,12 @@
 
 var opcaoAgendado;
 
-function verOpcaoAgendado() {
-  if (opcaoAgendado == "lista") {
-    $("#divLista").prop("hidden", false);
-    $("#grpPesqAgendada").prop("hidden", false);
-    $("#divMostra").prop("hidden", true);
-    listarPedidoAgendado();
-  }
-  else if (opcaoAgendado == "Mostra") {
-    $("#divLista").prop("hidden", true);
-    $("#grpPesqAgendada").prop("hidden", true);
-    $("#divMostra").prop("hidden", false);
-  }
-}
-
 $(document).on("click", "#btnVoltar", function () {
   if (opcaoAgendado == "lista") {
     $(location).attr("href", "menu.html");
   }
   else if (opcaoAgendado == "Mostra") {
     location.reload();
-  }
-});
-
-$(document).on("click", "#btnPesquisaAgendada", function () {
-  var pesquisa = $("#pesquisaAgendada").val();
-  if (pesquisa.length < 3) {
-    navigator.notification.alert("Conteúdo digitado é insuficiente para a pesquisa.");
-  }
-  else {
-    var status = 02;
-    var form_data = new FormData();
-    form_data.append("pesquisa", pesquisa);
-    form_data.append("status", status);
-    $.ajax({
-      type: "post",
-      url: "https://rentalsystempm.000webhostapp.com/php/pedido/pesquisarPedidoApp.php",
-      data: form_data,
-      contentType: false,
-      cache: false,
-      processData: false,
-      success: function (data) {
-        opcaoAgendado = "lista";
-        $("#divMostra").prop("hidden", true);
-        $("#divLista").prop("hidden", false);
-        var novoPedido = "";
-        $.each(data.pedido, function (i, dados) {
-          navigator.notification.alert(dados.endereco);
-          var dataEntrega = (dados.dataEntrega);
-          var dateEntrega = new Date(dataEntrega);
-          if (dateEntrega.getHours() < 10) {
-            if (dateEntrega.getMinutes() < 10) {
-              var horaEntrega = "0" + dateEntrega.getHours();
-              var minEntrega = "0" + dateEntrega.getMinutes();
-            }
-            else {
-              var horaEntrega = "0" + dateEntrega.getHours();
-              var minEntrega = dateEntrega.getMinutes();
-            }
-          }
-          else {
-            if (dateEntrega.getMinutes() < 10) {
-              var horaEntrega = dateEntrega.getHours();
-              var minEntrega = "0" + dateEntrega.getMinutes();
-            }
-            else {
-              var horaEntrega = dateEntrega.getHours();
-              var minEntrega = dateEntrega.getMinutes();
-            }
-          }
-          novoPedido += "<div class='row linha itemProd' data-id='" + dados.codigo + "'><div class='col-xs-12'><label for=''><strong>Cliente:</strong><br>" + dados.cliente + "</label><br><label for=''><strong>Endereço:</strong><br>" + dados.endereco + ", " + dados.numero + ", " + dados.bairro + ", " + dados.cidade + ", " + dados.UF + "</label><br><label for=''><strong>Entrega: </strong><br>" + (dateEntrega.getDate() + "/" + (dateEntrega.getMonth() + 1) + "/" + dateEntrega.getFullYear() + ", às " + horaEntrega + ":" + minEntrega) + "</label><br><label for=''><strong>Valor:</strong><br>R$ " + dados.valor + "</label><br></div></div>";
-        });
-        $("#divLista").html(novoPedido);
-      },
-      error: function (data) {
-        alert(data);
-      }
-    });
   }
 });
 
@@ -116,7 +45,7 @@ function listarPedidoAgendado() {
         }
         novoPedido += "<div class='row linha itemProd' data-id='" + dados.codigo + "'><div class='col-xs-12'><label for=''><strong>Cliente:</strong><br>" + dados.cliente + "</label><br><label for=''><strong>Endereço:</strong><br>" + dados.endereco + ", " + dados.numero + ", " + dados.bairro + ", " + dados.cidade + ", " + dados.UF + "</label><br><label for=''><strong>Entrega: </strong><br>" + (dateEntrega.getDate() + "/" + (dateEntrega.getMonth() + 1) + "/" + dateEntrega.getFullYear() + ", às " + horaEntrega + ":" + minEntrega) + "</label><br><label for=''><strong>Valor:</strong><br>R$ " + dados.valor + "</label><br></div></div>";
       });
-      $("#divLista").html(novoPedido);
+      $("#divAgendada").html(novoPedido);
     },
     error: function (data) {
       navigator.notification.alert(data);
@@ -127,10 +56,15 @@ function listarPedidoAgendado() {
 $(document).on("click", ".itemProd", function () {
   var codigo = $(this).data('id');
   opcaoAgendado = "Mostra";
-  verOpcaoAgendado();
+  mostrarPedido();
   $("#hMostra").attr("value", codigo);
   setPedidoAgendado(codigo);
 });
+
+function mostrarPedido(){
+  var pedido = "<div class='row linha'><div class='col-xs-12'><h3 id='hMostra' value=''>Informações do pedido</h3></div></div><div class='row linha'><div class='col-xs-12'><p><strong>Endereço:</strong></p><p id='endereco'></p></div></div><div class='row linha'><div class='col-xs-12'><p><strong>Referência:</strong></p><p id='referencia'></p></div></div><div class='row linha'><div class='col-xs-12'><p><strong>Cliente</strong>:</p><p id='cliente'></p></div></div><div class='row linha'><div class='col-xs-12'><h4>Entrega:</h4><div class='col-xs-6'><p><strong>Data:</strong></p><p id='dataEntrega'></p></div><div class='col-xs-6'><p><strong>Horário:</strong></p><p id='horaEntrega'></p></div></div></div><div class='row linha'><div class='col-xs-12'><h4>Retirada:</h4><div class='col-xs-6'><p><strong>Data:</strong></p><p id='dataRetirada'></p></div><div class='col-xs-6'><p><strong>Horário:</strong></p><p id='horaRetirada'></p></div></div></div><div class='row linha'><div class='col-md-12'><h4>Produtos:</h4><table><tr><th>Mesas</th><td></td><td><label id='qt_mesas'></label></td></tr><tr><th>Cadeiras</th><td></td><td><label id='qt_cadeiras'></label></td></tr><tr><th>Toalhas</th><td><label id='corToalha'></label></td><td><label id='qt_toalhas'></label></td></tr></table></div></div><div class='row linha'><div class='col-xs-6'><p><strong>Feito em:</strong></p><p id='dataPedido'></p></div><div class='col-xs-6'><p><strong>Valor:</strong></p><p id='valor'></p></div></div><div class='row linha'><div class='col-xs-12'><div id='map'><script src='https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js'></script><link type='text/css' rel='stylesheet' href='https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css' /></div></div></div><div class='row linha'><div class='col-xs-6'></div><div class='col-xs-6'><button class='btn btn-success btn-block' id='btnConcluir'>Concluir pedido</button></div></div>";
+  $("#divAgendada").html(pedido);
+}
 
 function setPedidoAgendado(codigo) {
   $.ajax({
